@@ -29,11 +29,9 @@ var getMatch = (user) => {
       if ((j + 1) === score.length) {
         matchPool.push(matchScore)
         pool[i].diff = matchScore
-        console.log("in loop " + pool[i].diff)
       }
     }
     if ((i + 1) === pool.length) {
-      console.log(theOne)
       let x = Math.min.apply(null, matchPool);
       for (n = 0; n < pool.length; n++) {
         if (pool[n].diff === x) {
@@ -60,7 +58,10 @@ apiRouter.route('/friends')
     var userData = req.body;
     var score = req.body.scores;
     console.log("userScore", score)
+    var pool = friends.pool;
+
     res.send(getMatch(userData))
+        pool.push(userData)
   })
 
 module.exports = apiRouter
